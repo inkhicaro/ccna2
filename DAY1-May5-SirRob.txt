@@ -284,14 +284,14 @@ exit
 
 !OUTGOING CALL FROM CUCM TO OTHER CUCM.
 configure terminal
- dial-peer voice 11 Voip
- destination-pattern 11..
- session target ipv4:10.11.100.8
+ !dial-peer voice 11 Voip
+ !destination-pattern 11..
+ !session target ipv4:10.11.100.8
+ !codec g711ULAW
+dial-peer voice 12 Voip
+ destination-pattern 12..
+ session target ipv4:10.12.100.8
  codec g711ULAW
-  !dial-peer voice 12 Voip
-  !destination-pattern 12..
-  !session target ipv4:10.12.100.8
-  !codec g711ULAW
 dial-peer voice 21 Voip
  destination-pattern 21..
  session target ipv4:10.21.100.8
