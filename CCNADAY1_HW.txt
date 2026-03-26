@@ -30,14 +30,14 @@
  conf t
   int e0/0
   switchport mode access
-  switchport acces vlan 10
+  switchport access vlan 10
  end
 !************************
-!@A1
+!@A2
  conf t
   int e1/0
   switchport mode access
-  switchport acces vlan 10
+  switchport access vlan 10
  end
 !**************
 !@P1
@@ -57,12 +57,34 @@
 !***********************
 
 !EXERCISE 2
-! CONFIGURE D1 & D2 AS DHCP SERVER FOR VLAN 100
+! CONFIGURE D1 AS DHCP SERVER FOR VLAN 100
 !	-DHCP POOL NAME: SERVERPOOL
 !	-NW: 192.168.1.128 255.255.255.224
 !	-DEFAULT GATEWAY: 192.168.1.129
 !	-DNS: 192.168.1.129
 !	-DOMAIN: SERVER.COM
+
+!@D1
+ conf t
+  ip dhcp pool SERVERPOOL
+  network 192.168.1.128 255.255.255.224
+  default-router 192.168.1.129
+  dns-server 129.168.1.129
+  domain-name SERVER.COM
+  exit
+  int e1/0
+  switchport mode access
+  switchport access vlan 100
+ end
+!**************
+!@S1
+ conf t
+  int e1/0
+  no shut
+  ip add dhcp
+ end
+sh ip int br | exc una
+!************************************************
 !************************************************
 !EXERCISE 3
 ! CONFIGURE D2 AS DHCP SERVER FOR VLAN 20
@@ -70,4 +92,32 @@
 !	-NW: 10.2.2.0 255.255.255.0
 !	-DEFAULT GATEWAY: 10.2.2.2
 !	-DNS: 10.2.2.2
-!	-DOMAIN: SERVER.COM
+!	-DOMAIN: DNS.COM
+
+!@D2
+ conf t
+  ip dhcp pool SERVERPOOL
+  network 10.2.2.0 255.255.255.0
+  default-router 10.2.2.2
+  dns-server 10.2.2.2
+  domain-name DNS.COM
+ exit
+  int e1/0
+  switchport mode access
+  switchport access vlan 20
+ end
+!************************
+!@D2
+ conf t
+  int e1/0
+  switchport mode access
+  switchport access vlan 20
+ end
+!**************
+!@S2
+ conf t
+  int e1/0
+  no shut
+  ip add dhcp
+ end
+sh ip int br | exc una
