@@ -75,7 +75,7 @@ WARNING: IF YOU SEE AMBER/ORANGE= NEEDS FIXING!!!
 Trunk Ports: switch to switch:
 TAAS/BABA:
 config t
-Int Range fa0/10-11
+Int Range fa0/10-12
  ! shutdown
  no shutdown
  switchport trunk Encap Dot1Q
@@ -87,7 +87,7 @@ CCNPSkillsNow: Etherchannel with LinkAggregationControlProtocol:
 WARNING: THREE CABLES IS BETTER THAN ONE!
 @taas/BABA:
 config t
-Int Range fa0/10-11
+Int Range fa0/10-12
  channel-group 1 mode active
  channel-protocol Lacp
  do sh etherchannel summary
